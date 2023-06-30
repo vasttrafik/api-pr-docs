@@ -47,15 +47,19 @@ Version 4.
     - 9.1.1 Filtrera på enskilda fordon
     - 9.1.2 Filtrera på enskilda linjer
 - 10 Tjänster för ankomster och avgångar
-  - 10.1 stopareas/{stopAreaGid}/departures
+  - 10.1 Stop-areas/{stopAreaGid}/departures
     - 10.1.1 Filtrera på hållplatsläge
     - 10.1.2 Inställda avgångar
-  - 10.2 stopareas/{stopAreaGid}/arrivals
-  - 10.3 stopareas/{stopAreaGid}/departures/{detailsReference}/details
+  - 10.2 Stop-areas/{stopAreaGid}/arrivals
+  - 10.3 Stop-areas/{stopAreaGid}/departures/{detailsReference}/details
     - 10.3.1 ServiceJourney:ns koordinater
     - 10.3.2 Samtliga hållplatser för ServiceJourney:s
     - 10.3.3 Trängselprognos
   - 10.4 Stop-areas/{stopAreaGid}/arrivals/{detailsReference}/details
+  - 10.5 Stop-points/{stopPointGid}/departures
+  - 10.6 Stop-points/{stopPointGid}/arrivals
+  - 10.7 Stop-points/{stopPointGid}/departures/{detailsReference}/details
+  - 10.8 Stop-points/{stopPointGid}/arrivals/{detailsReference}/details
 - 11 Trängselprognoser
   - 11.1 Beräkning av trängsel
     - 11.1.1 Trängselnivåer
@@ -86,7 +90,7 @@ API:et är uppdelat i följande tjänster och resurser:
   - /by-coordinates
 - Positions
   - /
-- StopAreas
+- Stop-Areas
   - /departures
   - /departures/details
   - /arrivals
@@ -518,7 +522,7 @@ Parametern går att skicka med flera gånger i frågan, en gång för varje `lin
 
 # 10 Tjänster för ankomster och avgångar
 
-## 10.1 stopareas/{stopAreaGid}/departures
+## 10.1 Stop-areas/{stopAreaGid}/departures
 
 Denna endpoint hämtar avgångar för en _StopArea_. Om det finns realtidsinformation om avgången
 bör den visas för en slutanvändare i stället för den planerade avgångstiden (se 6.2.1).
@@ -527,24 +531,24 @@ bör den visas för en slutanvändare i stället för den planerade avgångstide
 
 Det går att filtrera avgångarna på hållplatsläge, men då används inte _GID_:en för hållplatsläget utan
 namnet, till exempel ”C”. Hållplatslägets namn återfinns under `stopPoint.platform` i svaren
-från APR.
+från APR. Se 10.5 för att visa avgångar från hållplatsläge med _GID_.
 
 Parameternamnet är: `platforms`
 
 ### 10.1.2 Inställda avgångar
 
 Observera att realtidsdata även kan innebära inställda avgångar. En avgång kan vara helt eller delvis
-inställd , där delvis innebär att en eller flera, men inte alla, hållplatser på turen är inställda.
+inställd, där delvis innebär att en eller flera, men inte alla, hållplatser på turen är inställda.
 
 `isCancelled`
 
 `isPartCancelled`
 
-## 10.2 stopareas/{stopAreaGid}/arrivals
+## 10.2 Stop-areas/{stopAreaGid}/arrivals
 
 Denna endpoint fungerar som 10.1 men visar ankomster istället.
 
-## 10.3 stopareas/{stopAreaGid}/departures/{detailsReference}/details
+## 10.3 Stop-areas/{stopAreaGid}/departures/{detailsReference}/details
 
 Denna endpoint används för att hämta ut ytterligare detaljer för en avgång. Se 3.2 för information
 om `detailsReference`. Följande tillval kan hämtas ur detaljanropet:
@@ -574,21 +578,38 @@ tillsammans med `includes=servicejourneycalls`
 
 Denna endpoint fungerar som 10.3 för ankomster.
 
+## 10.5 Stop-points/{stopPointGid}/departures
+
+Denna endpoint fungerar som 10.1 för _StopPoint_:s.
+
+## 10.6 Stop-points/{stopPointGid}/arrivals
+
+Denna endpoint fungerar som 10.2 för _StopPoint_:s.
+
+## 10.7 Stop-points/{stopPointGid}/departures/{detailsReference}/details
+
+Denna endpoint fungerar som 10.3 för _StopPoint_:s.
+
+## 10.8 Stop-points/{stopPointGid}/arrivals/{detailsReference}/details
+
+Denna endpoint fungerar som 10.4 för _StopPoint_:s.
+
 # 11 Trängselprognoser
 
 Västtrafik samlar löpande in data om beläggning på fordon i trafik. Detta används sedan till att
 skapa trängselprognoser för de olika turerna på dygnet.
 
-Följande endpoints inkluderar alltid trängseldata:
+Följande endpoints inkluderar trängseldata med `includeOccupancy`-parametern:
 
 - Journeys
 - Stop-areas/{stopAreaGid}/departures
+- Stop-points/{stopPointGid}/departures
 
 Följande endpoints kan inkludera trängseldata om det anges i `includes`-parametern.
 
 - Journeys/{detailsReference}/details
 - Stop-areas/{stopAreaGid}/departures/{detailsReference}/details
-- Stop-areas/{stopAreaGid}/arrivals/{detailsReference}/details
+- Stop-points/{stopPointGid}/departures/{detailsReference}/details
 
 Trängselprognoser är för tillfället inte tillgängliga för färjor.
 
@@ -721,7 +742,7 @@ alternativa kommunikationsmedel (lila färg).
 I diagrammet kan en adress vara både adress och hållplats. En hållplats är alltid en
 kollektivtrafikhållplats.
 
-![diagram](https://github.com/vasttrafik/pr-api-docs/assets/14925434/2004a217-3ae0-4423-bc03-5c8e9ccff367)
+![diagram](https://github.com/vasttrafik/api-pr-docs/assets/14925434/21adac87-2c72-4508-b781-fee9b39f757b)
 
 ### 15.2.2 TripLegs och ConnectionLinks
 
