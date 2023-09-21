@@ -49,7 +49,8 @@ Version 4.
 - 10 Tjänster för ankomster och avgångar
   - 10.1 Stop-areas/{stopAreaGid}/departures
     - 10.1.1 Filtrera på hållplatsläge
-    - 10.1.2 Inställda avgångar
+    - 10.1.2 Filtrera på slutdestination
+    - 10.1.3 Inställda avgångar
   - 10.2 Stop-areas/{stopAreaGid}/arrivals
   - 10.3 Stop-areas/{stopAreaGid}/departures/{detailsReference}/details
     - 10.3.1 ServiceJourney:ns koordinater
@@ -535,7 +536,13 @@ från APR. Se 10.5 för att visa avgångar från hållplatsläge med _GID_.
 
 Parameternamnet är: `platforms`
 
-### 10.1.2 Inställda avgångar
+### 10.1.2 Filtrera på slutdestination
+
+Det går att filtrera avgångarna på _ServiceJourney_:ns ändhållplats. Ändhållplatsen är den sista _StopArea_:n på turen, vilket kan hämtas genom att göra ett anrop till details-endpoint:en (se 10.3) med parametern: `includes=servicejourneycalls`.
+
+Parameternamnet är: `directionGid`
+
+### 10.1.3 Inställda avgångar
 
 Observera att realtidsdata även kan innebära inställda avgångar. En avgång kan vara helt eller delvis
 inställd, där delvis innebär att en eller flera, men inte alla, hållplatser på turen är inställda.
