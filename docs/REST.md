@@ -502,6 +502,8 @@ Denna endpoint tar latitud och longitud för en bounding box (rektangel) som par
 returnerar position, riktning och linjeinformation för alla fordon som befinner sig inom
 koordinaterna (de diagonalt motsatta hörnen för rektangeln anges).
 
+Positionerna är ungefärliga och bygger på tiden som gått från senaste hållplats, som fordonet stannat vid, och sträckan till nästa planerade hållplats. En genomsnittlig hastighet för fordonet används längs den planerade rutten och tillsammans med tidpunkten för anropet resulterar det i en beräknad position. Beräkningen förutsätter ett normalt körtempo, som under normala trafikförhållanden stämmer relativt väl. Under trafikstörningar kan större eller mindre avvikelser förekomma.
+
 ### 9.1.1 Filtrera på enskilda fordon
 
 Det går att filtrera resultatet på enskilda fordon genom att ange `detailsReference`-värdet från
