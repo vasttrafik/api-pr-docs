@@ -61,6 +61,7 @@ Version 4.
   - 10.6 Stop-points/{stopPointGid}/arrivals
   - 10.7 Stop-points/{stopPointGid}/departures/{detailsReference}/details
   - 10.8 Stop-points/{stopPointGid}/arrivals/{detailsReference}/details
+  - 10.9 Stop-areas/
 - 11 Trängselprognoser
   - 11.1 Beräkning av trängsel
     - 11.1.1 Trängselnivåer
@@ -602,6 +603,10 @@ Denna endpoint fungerar som 10.3 för _StopPoint_:s.
 ## 10.8 Stop-points/{stopPointGid}/arrivals/{detailsReference}/details
 
 Denna endpoint fungerar som 10.4 för _StopPoint_:s.
+
+## 10.9 Stop-areas/
+
+Denna endpoint returnerar alla stop-areas i en lista.
 
 # 11 Trängselprognoser
 
