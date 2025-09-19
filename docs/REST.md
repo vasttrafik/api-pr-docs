@@ -164,7 +164,7 @@ består av bokstaven ”v” plus versionsnummer, till exempel: ”.../v4/journe
 
 # 6 Realtidsdata
 
-Realtidsdata inkluderar störningsmeddelanden, förseningar och annan information för:
+Realtidsdata inkluderar störningsmeddelanden, förseningar, hållplatsflytt och annan information för:
 
 - _Linjer_
 - _Hållplatser_
@@ -217,6 +217,19 @@ visar beräknad tid, om den finns, annars planerad tid. Dessa tidsangivelser inn
 - `estimatedOtherwisePlannedTime`
 - `estimatedOtherwisePlannedArrivalTime`
 - `estimatedOtherwisePlannedDepartureTime`
+
+### 6.2.2 Hållplatsflytt
+
+En tur kan få en flyttad hållplats inom samma hållplatsområde. Om detta sker populeras fältet
+- `realtimeStopPoint`.
+  Den innehåller information om det nya hållplatsläget så som koordinater och namn.
+  `stopPoint` innehåller den ursprungliga (nu inaktuella) hållplatsen.
+
+### 6.2.3 Realtidsturer
+
+Om turen är en akut insatt tur så kommer fältet
+- `isRealtimeJourney`
+  vara satt till true. Att turen är en realtidstur innebär också att informationen om fordonstyp saknas.
 
 # 7 Tjänster för reseförslag
 
@@ -553,6 +566,12 @@ inställd, där delvis innebär att en eller flera, men inte alla, hållplatser 
 `isCancelled`
 
 `isPartCancelled`
+
+Om en av de följande är satta till 'true' kan man ignorera `isCancelled`:
+
+`isArrivalCancelled`
+
+`isDepartureCancelled`
 
 ## 10.2 Stop-areas/{stopAreaGid}/arrivals
 
